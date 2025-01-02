@@ -1,6 +1,6 @@
 # ChatGPT Subtitle Translation Plugin for PotPlayer
 
-This plugin integrates OpenAI's ChatGPT API (or any model with the same API calling method) into PotPlayer for accurate and context-aware subtitle translation. Unlike traditional translation tools, this approach considers context, idioms, and cultural nuances, making it the ideal solution for translating subtitles.
+This plugin integrates OpenAI's ChatGPT API (or any model with the same API calling method) into PotPlayer for accurate subtitle translation. Unlike traditional translation tools, this approach considers idioms and cultural nuances, making it the ideal solution for translating subtitles.
 
 ---
 
@@ -50,7 +50,7 @@ This plugin integrates OpenAI's ChatGPT API (or any model with the same API call
 
 ## Why ChatGPT?
 
-This plugin ensures superior subtitle translation by leveraging models like ChatGPT, which consider context, idioms, and cultural nuances. For example:
+This plugin ensures superior subtitle translation by leveraging models like ChatGPT, which consider idioms and cultural nuances. For example:
 
 - Input: *"You're gonna old yeller my f**king universe."*  
   - **Google Translate**: *"你要老了我他妈的宇宙吗?"* (nonsensical).  
@@ -58,7 +58,7 @@ This plugin ensures superior subtitle translation by leveraging models like Chat
   - **ChatGPT**: *"你要像《老黄犬》一样对待我的宇宙?"* (accurately referencing the movie *Old Yeller*, capturing the intended meaning).  
     ![](https://github.com/Felix3322/PotPlayer_Chatgpt_Translate/blob/master/readme_res/Chatgpt.png)
 
-This level of contextual understanding sets these models apart from traditional translation tools.
+This level of understanding sets these models apart from traditional translation tools.
 
 ---
 
@@ -76,7 +76,7 @@ This level of contextual understanding sets these models apart from traditional 
 
 ## Features
 
-- **Context-Aware Translations**: Delivers translations that match the subtitle's meaning and tone.  
+- **Accurate Translations**: Delivers translations that match the subtitle's meaning and tone.  
 - **Cultural Nuances**: Preserves idiomatic expressions and cultural references.  
 - **Open Source**: All code and tools are fully open source for transparency.  
 - **Highly Configurable**: Choose your preferred model and set custom translation parameters.  
@@ -92,4 +92,4 @@ This level of contextual understanding sets these models apart from traditional 
 
 ## License
 
-This project is licensed under the MIT License.
+This project is licensed under the MIT Licence.
