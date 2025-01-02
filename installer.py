@@ -114,8 +114,8 @@ def main():
     default_path = r"C:\Program Files\DAUM\PotPlayer\Extension\Subtitle\Translate"
 
     # 下载链接
-    as_file_url = "https://raw.githubusercontent.com/Felix3322/PotPlayer_Chatgpt_Translate/master/SubtitleTranslate%20-%20ChatGPT.as"
-    ico_file_url = "https://raw.githubusercontent.com/Felix3322/PotPlayer_Chatgpt_Translate/master/SubtitleTranslate%20-%20ChatGPT.ico"
+    as_file_url = "https://raw.githubusercontent.com/Felix3322/PotPlayer_Chatgpt_Translate/WithoutContextHandling/SubtitleTranslate%20-%20ChatGPT.as"
+    ico_file_url = "https://raw.githubusercontent.com/Felix3322/PotPlayer_Chatgpt_Translate/WithoutContextHandling/SubtitleTranslate%20-%20ChatGPT.ico"
 
     # 检测默认路径
     if not os.path.exists(default_path):
