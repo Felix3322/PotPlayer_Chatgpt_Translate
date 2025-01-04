@@ -24,7 +24,7 @@ string GetLoginDesc() {
 }
 
 string GetUserText() {
-    return "{$CP949=모델 이름 + API 주소 (현재: " + selected_model + " | " + apiUrl + ")$}{$CP950=模型名稱 + API 地址 (目前: " + selected_model + " | " + apiUrl + ")$}{$CP0=Model Name + API URL (Current: " + selected_model + " | " + apiUrl + ")$}";
+    return "{$CP949=모델 이름|API 주소 (현재: " + selected_model + " | " + apiUrl + ")$}{$CP950=模型名稱|API 地址 (目前: " + selected_model + " | " + apiUrl + ")$}{$CP0=Model Name|API URL (Current: " + selected_model + " | " + apiUrl + ")$}";
 }
 
 string GetPasswordText() {
