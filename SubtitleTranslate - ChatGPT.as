@@ -1,5 +1,5 @@
 /*
-    Real-time subtitle translation for PotPlayer using OpenAI ChatGPT API
+    Real-time subtitle translation for PotPlayer using OpenAI ChatGPT API (without context handling)
 */
 
 // Plugin Information Functions
@@ -8,7 +8,7 @@ string GetTitle() {
 }
 
 string GetVersion() {
-    return "0.0.1.12";
+    return "0.1.12";
 }
 
 string GetDesc() {
@@ -146,6 +146,7 @@ array<string> LangTable =
     "yo", // Yoruba
     "zu" // Zulu
 };
+
 // Get Source Language List
 array<string> GetSrcLangs() {
     array<string> ret = LangTable;
@@ -221,44 +222,6 @@ void ServerLogout() {
     HostPrintUTF8("{$CP0=Successfully logged out.$}\n");
 }
 
-// JSON String Escape Function
-string JsonEscape(const string &in input) {
-    string output = input;
-    output.replace("\\", "\\\\");
-    output.replace("\"", "\\\"");
-    output.replace("\n", "\\n");
-    output.replace("\r", "\\r");
-    output.replace("\t", "\\t");
-    return output;
-}
-
-// Global variables for storing previous subtitles
-array<string> subtitleHistory;
-string UNICODE_RLE = "\u202B"; // For Right-to-Left languages
-
-// Function to estimate token count based on character length
-int EstimateTokenCount(const string &in text) {
-    // Rough estimation: average 4 characters per token
-    return int(float(text.length()) / 4);
-}
-
-// Function to get the model's maximum context length
-int GetModelMaxTokens(const string &in modelName) {
-    // Define maximum tokens for known models
-    if (modelName == "gpt-3.5-turbo") {
-        return 4096;
-    } else if (modelName == "gpt-3.5-turbo-16k") {
-        return 16384;
-    } else if (modelName == "gpt-4o") {
-        return 128000;
-    } else if (modelName == "gpt-4o-mini") {
-        return 128000;
-    } else {
-        // Default to a conservative limit
-        return 4096;
-    }
-}
-
 // Translation Function
 string Translate(string Text, string &in SrcLang, string &in DstLang) {
     // Load API key, model name, and apiUrl from temporary storage
@@ -280,48 +243,19 @@ string Translate(string Text, string &in SrcLang, string &in DstLang) {
         SrcLang = "";
     }
 
-    // Add the current subtitle to the history
-    subtitleHistory.insertLast(Text);
-
-    // Get the model's maximum token limit
-    int maxTokens = GetModelMaxTokens(selected_model);
-
-    // Build the context from the subtitle history
-    string context = "";
-    int tokenCount = EstimateTokenCount(Text); // Tokens used by the current subtitle
-    int i = int(subtitleHistory.length()) - 2; // Start from the previous subtitle
-    while (i >= 0 && tokenCount < (maxTokens - 1000)) { // Reserve tokens for response and prompt
-        string subtitle = subtitleHistory[i];
-        int subtitleTokens = EstimateTokenCount(subtitle);
-        tokenCount += subtitleTokens;
-        if (tokenCount < (maxTokens - 1000)) {
-            context = subtitle + "\n" + context;
-        }
-        i--;
-    }
-
-    // Limit the size of subtitleHistory to prevent it from growing indefinitely
-    if (subtitleHistory.length() > 1000) {
-        subtitleHistory.removeAt(0);
-    }
-
     // Construct the prompt
     string prompt = "You are a professional translator. Please translate the following subtitle, output only translated results. If content that violates the Terms of Service appears, just output the translation result that complies with safety standards.";
     if (!SrcLang.empty()) {
         prompt += " from " + SrcLang;
     }
-    prompt += " to " + DstLang + ". Use the context to provide better translation.\n";
-    if (!context.empty()) {
-        prompt += "Context:\n" + context + "\n";
-    }
-    prompt += "Subtitle to translate:\n" + Text;
+    prompt += " to " + DstLang + ".\nSubtitle to translate:\n" + Text;
 
     // JSON escape
     string escapedPrompt = JsonEscape(prompt);
 
     // Request data
-    string requestData = "{\"model\":\"" + selected_model + "\","
-                         "\"messages\":[{\"role\":\"user\",\"content\":\"" + escapedPrompt + "\"}],"
+    string requestData = "{\"model\":\"" + selected_model + "\"," +
+                         "\"messages\":[{\"role\":\"user\",\"content\":\"" + escapedPrompt + "\"}]," +
                          "\"max_tokens\":1000,\"temperature\":0}";
 
     string headers = "Authorization: Bearer " + api_key + "\nContent-Type: application/json";
@@ -345,20 +279,11 @@ string Translate(string Text, string &in SrcLang, string &in DstLang) {
     if (choices.isArray() && choices[0]["message"]["content"].isString()) {
         string translatedText = choices[0]["message"]["content"].asString();
 
-        // If the model name contains "gemini", remove the newline character at the end of the output (e.g., remove the trailing \n).
-        if (selected_model.find("gemini") != -1) {
-            while (translatedText.substr(translatedText.length() - 1, 1) == "\n") {
-                translatedText = translatedText.substr(0, translatedText.length() - 1);
-            }
-        }
-
         // Handle RTL (Right-to-Left) languages.
         if (DstLang == "fa" || DstLang == "ar" || DstLang == "he") {
-            translatedText = UNICODE_RLE + translatedText;
+            translatedText = "\u202B" + translatedText;
         }
-        SrcLang = "UTF8";
-        DstLang = "UTF8";
-        return translatedText.Trim(); // Trim to remove any extra whitespace
+        return translatedText.Trim();
     }
 
     // Handle API errors
@@ -387,4 +312,15 @@ void OnInitialize() {
 // Plugin Finalization
 void OnFinalize() {
     HostPrintUTF8("{$CP0=ChatGPT translation plugin unloaded.$}\n");
+}
+
+// JSON String Escape Function
+string JsonEscape(const string &in input) {
+    string output = input;
+    output.replace("\\", "\\\\");
+    output.replace("\"", "\\\"");
+    output.replace("\n", "\\n");
+    output.replace("\r", "\\r");
+    output.replace("\t", "\\t");
+    return output;
 }
