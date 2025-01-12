@@ -1,5 +1,5 @@
 /*
-    Real-time subtitle translation for PotPlayer using OpenAI ChatGPT API (without context handling)
+    Real-time subtitle translation for PotPlayer using OpenAI ChatGPT API
 */
 
 // Plugin Information Functions
@@ -8,7 +8,7 @@ string GetTitle() {
 }
 
 string GetVersion() {
-    return "2.0";
+    return "0.0.1.12";
 }
 
 string GetDesc() {
@@ -40,13 +40,111 @@ string UserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64)";
 // Supported Language List
 array<string> LangTable =
 {
-    "{$CP0=Auto Detect$}", "af", "sq", "am", "ar", "hy", "az", "eu", "be", "bn", "bs", "bg", "ca",
-    "ceb", "ny", "zh-CN",
-    "zh-TW", "co", "hr", "cs", "da", "nl", "en", "eo", "et", "tl", "fi", "fr",
-    "fy", "gl", "ka", "de", "el", "gu", "ht", "ha", "haw", "he", "hi", "hmn", "hu", "is", "ig", "id", "ga", "it", "ja", "jw", "kn", "kk", "km",
-    "ko", "ku", "ky", "lo", "la", "lv", "lt", "lb", "mk", "ms", "mg", "ml", "mt", "mi", "mr", "mn", "my", "ne", "no", "ps", "fa", "pl", "pt",
-    "pa", "ro", "ru", "sm", "gd", "sr", "st", "sn", "sd", "si", "sk", "sl", "so", "es", "su", "sw", "sv", "tg", "ta", "te", "th", "tr", "uk",
-    "ur", "uz", "vi", "cy", "xh", "yi", "yo", "zu"
+    "Auto Detect", // Auto Detect
+    "af", // Afrikaans
+    "sq", // Albanian
+    "am", // Amharic
+    "ar", // Arabic
+    "hy", // Armenian
+    "az", // Azerbaijani
+    "eu", // Basque
+    "be", // Belarusian
+    "bn", // Bengali
+    "bs", // Bosnian
+    "bg", // Bulgarian
+    "ca", // Catalan
+    "ceb", // Cebuano
+    "ny", // Chichewa
+    "zh-CN", // Chinese (Simplified)
+    "zh-TW", // Chinese (Traditional)
+    "co", // Corsican
+    "hr", // Croatian
+    "cs", // Czech
+    "da", // Danish
+    "nl", // Dutch
+    "en", // English
+    "eo", // Esperanto
+    "et", // Estonian
+    "tl", // Filipino
+    "fi", // Finnish
+    "fr", // French
+    "fy", // Frisian
+    "gl", // Galician
+    "ka", // Georgian
+    "de", // German
+    "el", // Greek
+    "gu", // Gujarati
+    "ht", // Haitian Creole
+    "ha", // Hausa
+    "haw", // Hawaiian
+    "he", // Hebrew
+    "hi", // Hindi
+    "hmn", // Hmong
+    "hu", // Hungarian
+    "is", // Icelandic
+    "ig", // Igbo
+    "id", // Indonesian
+    "ga", // Irish
+    "it", // Italian
+    "ja", // Japanese
+    "jw", // Javanese
+    "kn", // Kannada
+    "kk", // Kazakh
+    "km", // Khmer
+    "ko", // Korean
+    "ku", // Kurdish (Kurmanji)
+    "ky", // Kyrgyz
+    "lo", // Lao
+    "la", // Latin
+    "lv", // Latvian
+    "lt", // Lithuanian
+    "lb", // Luxembourgish
+    "mk", // Macedonian
+    "ms", // Malay
+    "mg", // Malagasy
+    "ml", // Malayalam
+    "mt", // Maltese
+    "mi", // Maori
+    "mr", // Marathi
+    "mn", // Mongolian
+    "my", // Myanmar (Burmese)
+    "ne", // Nepali
+    "no", // Norwegian
+    "ps", // Pashto
+    "fa", // Persian
+    "pl", // Polish
+    "pt", // Portuguese
+    "pa", // Punjabi
+    "ro", // Romanian
+    "ru", // Russian
+    "sm", // Samoan
+    "gd", // Scots Gaelic
+    "sr", // Serbian
+    "st", // Sesotho
+    "sn", // Shona
+    "sd", // Sindhi
+    "si", // Sinhala
+    "sk", // Slovak
+    "sl", // Slovenian
+    "so", // Somali
+    "es", // Spanish
+    "su", // Sundanese
+    "sw", // Swahili
+    "sv", // Swedish
+    "tg", // Tajik
+    "ta", // Tamil
+    "te", // Telugu
+    "th", // Thai
+    "tr", // Turkish
+    "uk", // Ukrainian
+    "ur", // Urdu
+    "uz", // Uzbek
+    "vi", // Vietnamese
+    "cy", // Welsh
+    "xh", // Xhosa
+    "yi", // Yiddish
+    "yo", // Yoruba
+    "zu" // Zulu
 };
 
 // Get Source Language List
@@ -124,6 +222,44 @@ void ServerLogout() {
     HostPrintUTF8("{$CP0=Successfully logged out.$}\n");
 }
 
+// JSON String Escape Function
+string JsonEscape(const string &in input) {
+    string output = input;
+    output.replace("\\", "\\\\");
+    output.replace("\"", "\\\"");
+    output.replace("\n", "\\n");
+    output.replace("\r", "\\r");
+    output.replace("\t", "\\t");
+    return output;
+}
+
+// Global variables for storing previous subtitles
+array<string> subtitleHistory;
+string UNICODE_RLE = "\u202B"; // For Right-to-Left languages
+
+// Function to estimate token count based on character length
+int EstimateTokenCount(const string &in text) {
+    // Rough estimation: average 4 characters per token
+    return int(float(text.length()) / 4);
+}
+
+// Function to get the model's maximum context length
+int GetModelMaxTokens(const string &in modelName) {
+    // Define maximum tokens for known models
+    if (modelName == "gpt-3.5-turbo") {
+        return 4096;
+    } else if (modelName == "gpt-3.5-turbo-16k") {
+        return 16384;
+    } else if (modelName == "gpt-4o") {
+        return 128000;
+    } else if (modelName == "gpt-4o-mini") {
+        return 128000;
+    } else {
+        // Default to a conservative limit
+        return 4096;
+    }
+}
+
 // Translation Function
 string Translate(string Text, string &in SrcLang, string &in DstLang) {
     // Load API key, model name, and apiUrl from temporary storage
@@ -145,19 +281,48 @@ string Translate(string Text, string &in SrcLang, string &in DstLang) {
         SrcLang = "";
     }
 
+    // Add the current subtitle to the history
+    subtitleHistory.insertLast(Text);
+
+    // Get the model's maximum token limit
+    int maxTokens = GetModelMaxTokens(selected_model);
+
+    // Build the context from the subtitle history
+    string context = "";
+    int tokenCount = EstimateTokenCount(Text); // Tokens used by the current subtitle
+    int i = int(subtitleHistory.length()) - 2; // Start from the previous subtitle
+    while (i >= 0 && tokenCount < (maxTokens - 1000)) { // Reserve tokens for response and prompt
+        string subtitle = subtitleHistory[i];
+        int subtitleTokens = EstimateTokenCount(subtitle);
+        tokenCount += subtitleTokens;
+        if (tokenCount < (maxTokens - 1000)) {
+            context = subtitle + "\n" + context;
+        }
+        i--;
+    }
+
+    // Limit the size of subtitleHistory to prevent it from growing indefinitely
+    if (subtitleHistory.length() > 1000) {
+        subtitleHistory.removeAt(0);
+    }
+
     // Construct the prompt
     string prompt = "You are a professional translator. Please translate the following subtitle, output only translated results. If content that violates the Terms of Service appears, just output the translation result that complies with safety standards.";
     if (!SrcLang.empty()) {
         prompt += " from " + SrcLang;
     }
-    prompt += " to " + DstLang + ".\nSubtitle to translate:\n" + Text;
+    prompt += " to " + DstLang + ". Use the context to provide better translation.\n";
+    if (!context.empty()) {
+        prompt += "Context:\n" + context + "\n";
+    }
+    prompt += "Subtitle to translate:\n" + Text;
 
     // JSON escape
     string escapedPrompt = JsonEscape(prompt);
 
     // Request data
-    string requestData = "{\"model\":\"" + selected_model + "\"," +
-                         "\"messages\":[{\"role\":\"user\",\"content\":\"" + escapedPrompt + "\"}]," +
+    string requestData = "{\"model\":\"" + selected_model + "\","
+                         "\"messages\":[{\"role\":\"user\",\"content\":\"" + escapedPrompt + "\"}],"
                          "\"max_tokens\":1000,\"temperature\":0}";
 
     string headers = "Authorization: Bearer " + api_key + "\nContent-Type: application/json";
@@ -181,11 +346,20 @@ string Translate(string Text, string &in SrcLang, string &in DstLang) {
     if (choices.isArray() && choices[0]["message"]["content"].isString()) {
         string translatedText = choices[0]["message"]["content"].asString();
 
+        // If the model name contains "gemini", remove the newline character at the end of the output (e.g., remove the trailing \n).
+        if (selected_model.find("gemini") != -1) {
+            while (translatedText.substr(translatedText.length() - 1, 1) == "\n") {
+                translatedText = translatedText.substr(0, translatedText.length() - 1);
+            }
+        }
+
         // Handle RTL (Right-to-Left) languages.
         if (DstLang == "fa" || DstLang == "ar" || DstLang == "he") {
-            translatedText = "\u202B" + translatedText;
+            translatedText = UNICODE_RLE + translatedText;
         }
-        return translatedText.Trim();
+        SrcLang = "UTF8";
+        DstLang = "UTF8";
+        return translatedText.Trim(); // Trim to remove any extra whitespace
     }
 
     // Handle API errors
@@ -214,15 +388,4 @@ void OnInitialize() {
 // Plugin Finalization
 void OnFinalize() {
     HostPrintUTF8("{$CP0=ChatGPT translation plugin unloaded.$}\n");
-}
-
-// JSON String Escape Function
-string JsonEscape(const string &in input) {
-    string output = input;
-    output.replace("\\", "\\\\");
-    output.replace("\"", "\\\"");
-    output.replace("\n", "\\n");
-    output.replace("\r", "\\r");
-    output.replace("\t", "\\t");
-    return output;
 }
