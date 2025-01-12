@@ -146,7 +146,6 @@ array<string> LangTable =
     "yo", // Yoruba
     "zu" // Zulu
 };
-
 // Get Source Language List
 array<string> GetSrcLangs() {
     array<string> ret = LangTable;
