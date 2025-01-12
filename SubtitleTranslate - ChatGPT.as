@@ -234,12 +234,12 @@ string Translate(string Text, string &in SrcLang, string &in DstLang) {
         return "";
     }
 
-    if (DstLang.empty() || DstLang == "{$CP0=Auto Detect$}") {
+    if (DstLang.empty() || DstLang == "Auto Detect") {
         HostPrintUTF8("{$CP0=Target language not specified. Please select a target language.$}\n");
         return "";
     }
 
-    if (SrcLang.empty() || SrcLang == "{$CP0=Auto Detect$}") {
+    if (SrcLang.empty() || SrcLang == "Auto Detect") {
         SrcLang = "";
     }
 
