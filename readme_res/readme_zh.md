@@ -62,7 +62,7 @@
 2. 进入 `扩展 > 字幕翻译`。
 3. 选择 `ChatGPT Translate` 作为翻译插件。
 4. 配置插件：
-   - **模型名称**：输入模型名称和 API 接口 URL，格式为：`模型名称|API 接口 URL`（例如 `gpt-4|https://api.openai.com/v1/`）。
+   - **模型名称**：输入模型名称和 API 接口 URL，格式为：`模型名称|API 接口 URL`（例如 `gpt-4|https://api.openai.com/v1/chat/completions/`）。
    - **API 密钥**：提供你的 API 密钥。
 5. 根据需要设置源语言和目标语言。
 
