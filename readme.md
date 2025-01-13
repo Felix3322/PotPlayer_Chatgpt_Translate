@@ -48,20 +48,6 @@ This plugin integrates OpenAI's ChatGPT API (or any model with the same API call
 
 ---
 
-## Why ChatGPT?
-
-This plugin ensures superior subtitle translation by leveraging models like ChatGPT, which consider idioms and cultural nuances. For example:
-
-- Input: *"You're gonna old yeller my f**king universe."*  
-  - **Google Translate**: *"你要老了我他妈的宇宙吗?"* (nonsensical).  
-    ![](https://github.com/Felix3322/PotPlayer_Chatgpt_Translate/blob/master/readme_res/Google%20translate.png)
-  - **ChatGPT**: *"你要像《老黄犬》一样对待我的宇宙?"* (accurately referencing the movie *Old Yeller*, capturing the intended meaning).  
-    ![](https://github.com/Felix3322/PotPlayer_Chatgpt_Translate/blob/master/readme_res/Chatgpt.png)
-
-This level of understanding sets these models apart from traditional translation tools.
-
----
-
 ## Configuration
 
 1. Open PotPlayer `Preferences` (`F5`).
@@ -77,6 +63,20 @@ This level of understanding sets these models apart from traditional translation
      **Example**: `gpt-4o-mini|https://api.openai.com/v1/chat/completions/`  
    - **API Key**: Provide your API key.
 5. Set the source and target languages as needed.
+
+---
+
+## Why ChatGPT?
+
+This plugin ensures superior subtitle translation by leveraging models like ChatGPT, which consider idioms and cultural nuances. For example:
+
+- Input: *"You're gonna old yeller my f**king universe."*  
+  - **Google Translate**: *"你要老了我他妈的宇宙吗?"* (nonsensical).  
+    ![](https://github.com/Felix3322/PotPlayer_Chatgpt_Translate/blob/master/readme_res/Google%20translate.png)
+  - **ChatGPT**: *"你要像《老黄犬》一样对待我的宇宙?"* (accurately referencing the movie *Old Yeller*, capturing the intended meaning).  
+    ![](https://github.com/Felix3322/PotPlayer_Chatgpt_Translate/blob/master/readme_res/Chatgpt.png)
+
+This level of understanding sets these models apart from traditional translation tools.
 
 ---
 
