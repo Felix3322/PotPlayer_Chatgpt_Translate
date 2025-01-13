@@ -42,6 +42,24 @@
 
 ---
 
+## 配置
+
+1. 打开 PotPlayer 的 `偏好设置`（快捷键 `F5`）。
+2. 进入 `扩展 > 字幕翻译`。
+3. 选择 `ChatGPT Translate` 作为翻译插件。
+4. 配置插件：
+   - **模型名称**：  
+     你可以仅输入模型名称，此时将使用官方默认的 API 接口 URL。  
+     **示例**：`gpt-4`  
+   
+     或者，你可以输入模型名称和自定义 API 接口 URL，格式为：  
+     `模型名称|API 接口 URL`。  
+     **示例**：`gpt-4|https://api.openai.com/v1/chat/completions/`  
+   - **API 密钥**：提供你的 API 密钥。
+5. 根据需要设置源语言和目标语言。
+
+---
+
 ## 为什么选择 ChatGPT？
 
 通过结合成语和文化细节，该插件可以提供优质的字幕翻译。举个例子：
@@ -53,18 +71,6 @@
   ![](https://github.com/Felix3322/PotPlayer_Chatgpt_Translate/blob/master/readme_res/Chatgpt.png)
 
 这种理解能力使支持该插件的模型在传统翻译工具中脱颖而出。
-
----
-
-## 配置
-
-1. 打开 PotPlayer 的 `偏好设置`（快捷键 `F5`）。
-2. 进入 `扩展 > 字幕翻译`。
-3. 选择 `ChatGPT Translate` 作为翻译插件。
-4. 配置插件：
-   - **模型名称**：输入模型名称和 API 接口 URL，格式为：`模型名称|API 接口 URL`（例如 `gpt-4|https://api.openai.com/v1/chat/completions/`）。
-   - **API 密钥**：提供你的 API 密钥。
-5. 根据需要设置源语言和目标语言。
 
 ---
 
