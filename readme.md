@@ -22,18 +22,6 @@ This plugin integrates OpenAI's ChatGPT API (or any model with the same API call
 
 ---
 
-### Semi-Automatic Installation
-1. **Download the ZIP File**:  
-   Get the latest ZIP file from this repository.  
-2. **Extract the ZIP File**:  
-   Extract the contents to a temporary folder.  
-3. **Run the `setup.cmd` Script**:  
-   - Double-click `setup.cmd` to install the plugin.  
-   - This works only if PotPlayer is installed in its default path (`C:\Program Files\DAUM\PotPlayer`).  
-   - For custom installation paths, follow the manual installation instructions below.
-
----
-
 ### Manual Installation
 1. **Download the ZIP File**:  
    Get the latest ZIP file from this repository.  
