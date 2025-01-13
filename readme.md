@@ -68,7 +68,7 @@ This level of understanding sets these models apart from traditional translation
 2. Navigate to `Extensions > Subtitle translation`.
 3. Select `ChatGPT Translate` as the translation plugin.
 4. Configure the plugin:
-   - **Model Name**: Enter the model name and API URL in the format: `Model Name|API Interface URL` (e.g., `gpt-4|https://api.openai.com/v1/`).
+   - **Model Name**: Enter the model name and API URL in the format: `Model Name|API Interface URL` (e.g., `gpt-4|https://api.openai.com/v1/chat/completions/`).
    - **API Key**: Provide your API key.
 5. Set the source and target languages as needed.
 
