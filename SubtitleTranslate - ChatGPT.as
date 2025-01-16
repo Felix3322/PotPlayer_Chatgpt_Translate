@@ -203,9 +203,9 @@ string ServerLogin(string User, string Pass) {
     api_key = Pass;
 
     // 保存设置到临时存储
-    HostSaveString("api_key", api_key);
-    HostSaveString("selected_model", selected_model);
-    HostSaveString("apiUrl", apiUrl);
+    HostSaveString("wch_gpt_api_key", api_key);
+    HostSaveString("wch_gpt_selected_model", selected_model);
+    HostSaveString("wch_gpt_apiUrl", apiUrl);
 
     HostPrintUTF8("{$CP0=API Key and model name (plus API URL) successfully configured.$}\n");
     return "200 ok";
@@ -216,18 +216,18 @@ void ServerLogout() {
     api_key = "";
     selected_model = "gpt-4o-mini";
     apiUrl = "https://api.openai.com/v1/chat/completions"; // 还原默认
-    HostSaveString("api_key", "");
-    HostSaveString("selected_model", selected_model);
-    HostSaveString("apiUrl", apiUrl);
+    HostSaveString("wch_gpt_api_key", "");
+    HostSaveString("wch_gpt_selected_model", selected_model);
+    HostSaveString("wch_gpt_apiUrl", apiUrl);
     HostPrintUTF8("{$CP0=Successfully logged out.$}\n");
 }
 
 // Translation Function
 string Translate(string Text, string &in SrcLang, string &in DstLang) {
     // Load API key, model name, and apiUrl from temporary storage
-    api_key = HostLoadString("api_key", "");
-    selected_model = HostLoadString("selected_model", "gpt-4o-mini");
-    apiUrl = HostLoadString("apiUrl", "https://api.openai.com/v1/chat/completions");
+    api_key = HostLoadString("wch_gpt_api_key", "");
+    selected_model = HostLoadString("wch_gpt_selected_model", "gpt-4o-mini");
+    apiUrl = HostLoadString("wch_gpt_apiUrl", "https://api.openai.com/v1/chat/completions");
 
     if (api_key.empty()) {
         HostPrintUTF8("{$CP0=API Key not configured. Please enter it in the settings menu.$}\n");
@@ -300,10 +300,10 @@ string Translate(string Text, string &in SrcLang, string &in DstLang) {
 // Plugin Initialization
 void OnInitialize() {
     HostPrintUTF8("{$CP0=ChatGPT translation plugin loaded.$}\n");
-    // Load model name, API Key, and API URL from temporary storage (if saved)
-    api_key = HostLoadString("api_key", "");
-    selected_model = HostLoadString("selected_model", "gpt-4o-mini");
-    apiUrl = HostLoadString("apiUrl", "https://api.openai.com/v1/chat/completions");
+    // Load model name, API Key, and apiUrl from temporary storage (if saved)
+    api_key = HostLoadString("wch_gpt_api_key", "");
+    selected_model = HostLoadString("wch_gpt_selected_model", "gpt-4o-mini");
+    apiUrl = HostLoadString("wch_gpt_apiUrl", "https://api.openai.com/v1/chat/completions");
     if (!api_key.empty()) {
         HostPrintUTF8("{$CP0=Saved API Key, model name, and API URL loaded.$}\n");
     }
