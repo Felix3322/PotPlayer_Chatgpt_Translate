@@ -21,14 +21,14 @@ string GetDesc() {
 string GetLoginTitle() {
     return "{$CP949=OpenAI 모델 및 API 키 구성$}"
         + "{$CP950=OpenAI 模型與 API 金鑰配置$}"
-        + "{$CP936=OpenAI 模型与API密钥配置$}"
+        + "{$CP936=OpenAI 模型与 API 密钥配置$}"
         + "{$CP0=OpenAI Model + API URL and API Key Configuration$}";
 }
 
 string GetLoginDesc() {
     return "{$CP949=모델 이름과 API 주소, 그리고 API 키를 입력하십시오 (예: gpt-4o-mini|https://api.openai.com/v1/chat/completions).$}"
         + "{$CP950=請輸入模型名稱與 API 地址，以及 API 金鑰（例如 gpt-4o-mini|https://api.openai.com/v1/chat/completions）。$}"
-        + "{$CP936=请输入模型名称和API地址，以及 API 密钥（例如 gpt-4o-mini|https://api.openai.com/v1/chat/completions）。$}"
+        + "{$CP936=请输入模型名称和 API 地址，以及 API 密钥（例如 gpt-4o-mini|https://api.openai.com/v1/chat/completions）。$}"
         + "{$CP0=Please enter the model name + API URL and provide the API Key (e.g., gpt-4o-mini|https://api.openai.com/v1/chat/completions).$}";
 }
 
