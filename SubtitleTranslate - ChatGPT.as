@@ -4,7 +4,10 @@
 
 // Plugin Information Functions
 string GetTitle() {
-    return "{$CP949=ChatGPT 번역$}{$CP950=ChatGPT 翻譯$}{$CP0=ChatGPT Translate$}";
+    return "{$CP949=ChatGPT 번역$}"
+        + "{$CP950=ChatGPT 翻譯$}"
+        + "{$CP936=ChatGPT 翻译$}"
+        + "{$CP0=ChatGPT Translate$}";
 }
 
 string GetVersion() {
@@ -12,23 +15,35 @@ string GetVersion() {
 }
 
 string GetDesc() {
-    return "{$CP949=OpenAI ChatGPT를 사용한 실시간 자막 번역$}{$CP950=使用 OpenAI ChatGPT 的實時字幕翻譯$}{$CP0=Real-time subtitle translation using OpenAI ChatGPT$}";
+    return "Real-time subtitle translation using OpenAI ChatGPT.";
 }
 
 string GetLoginTitle() {
-    return "{$CP949=OpenAI 모델 및 API 키 구성$}{$CP950=OpenAI 模型與 API 金鑰配置$}{$CP0=OpenAI Model + API URL and API Key Configuration$}";
+    return "{$CP949=OpenAI 모델 및 API 키 구성$}"
+        + "{$CP950=OpenAI 模型與 API 金鑰配置$}"
+        + "{$CP936=OpenAI 模型与API密钥配置$}"
+        + "{$CP0=OpenAI Model + API URL and API Key Configuration$}";
 }
 
 string GetLoginDesc() {
-    return "{$CP949=모델 이름과 API 주소, 그리고 API 키를 입력하십시오 (예: gpt-4o-mini|https://api.openai.com/v1/chat/completions).$}{$CP950=請輸入模型名稱與 API 地址，以及 API 金鑰（例如 gpt-4o-mini|https://api.openai.com/v1/chat/completions）。$}{$CP0=Please enter the model name + API URL and provide the API Key (e.g., gpt-4o-mini|https://api.openai.com/v1/chat/completions).$}";
+    return "{$CP949=모델 이름과 API 주소, 그리고 API 키를 입력하십시오 (예: gpt-4o-mini|https://api.openai.com/v1/chat/completions).$}"
+        + "{$CP950=請輸入模型名稱與 API 地址，以及 API 金鑰（例如 gpt-4o-mini|https://api.openai.com/v1/chat/completions）。$}"
+        + "{$CP936=请输入模型名称和API地址，以及 API 密钥（例如 gpt-4o-mini|https://api.openai.com/v1/chat/completions）。$}"
+        + "{$CP0=Please enter the model name + API URL and provide the API Key (e.g., gpt-4o-mini|https://api.openai.com/v1/chat/completions).$}";
 }
 
 string GetUserText() {
-    return "{$CP949=모델 이름|API 주소 (현재: " + selected_model + " | " + apiUrl + ")$}{$CP950=模型名稱|API 地址 (目前: " + selected_model + " | " + apiUrl + ")$}{$CP0=Model Name|API URL (Current: " + selected_model + " | " + apiUrl + ")$}";
+    return "{$CP949=모델 이름|API 주소 (현재: " + selected_model + " | " + apiUrl + ")$}"
+        + "{$CP950=模型名稱|API 地址 (目前: " + selected_model + " | " + apiUrl + ")$}"
+        + "{$CP936=模型名称|API 地址 (目前: " + selected_model + " | " + apiUrl + ")$}"
+        + "{$CP0=Model Name|API URL (Current: " + selected_model + " | " + apiUrl + ")$}";
 }
 
 string GetPasswordText() {
-    return "{$CP949=API 키:$}{$CP950=API 金鑰:$}{$CP0=API Key:$}";
+    return "{$CP949=API 키:$}"
+        + "{$CP950=API 金鑰:$}"
+        + "{$CP936=API 密钥:$}"
+        + "{$CP0=API Key:$}";
 }
 
 // Global Variables
@@ -40,7 +55,7 @@ string UserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64)";
 // Supported Language List
 array<string> LangTable =
 {
-    "Auto Detect", // Auto Detect
+    "", // Auto Detect
     "af", // Afrikaans
     "sq", // Albanian
     "am", // Amharic
