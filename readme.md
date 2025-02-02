@@ -1,5 +1,9 @@
 # ChatGPT Subtitle Translation Plugin for PotPlayer
 
+![GitHub License](https://img.shields.io/badge/license-MIT-blue.svg)
+![GitHub Stars](https://img.shields.io/github/stars/Felix3322/PotPlayer_Chatgpt_Translate?style=social)
+![GitHub Forks](https://img.shields.io/github/forks/Felix3322/PotPlayer_Chatgpt_Translate?style=social)
+
 This plugin integrates OpenAI's ChatGPT API (or any model with the same API calling method) into PotPlayer for accurate subtitle translation. Unlike traditional translation tools, this approach considers idioms and cultural nuances, making it the ideal solution for translating subtitles.
 
 ---
@@ -32,7 +36,7 @@ This plugin integrates OpenAI's ChatGPT API (or any model with the same API call
    ```
    C:\Program Files\DAUM\PotPlayer\Extension\Subtitle\Translate
    ```
-   Replace `C:\Program Files\DAUM\PotPlayer` with your custom PotPlayer installation path, if necessary.
+   替换 `C:\Program Files\DAUM\PotPlayer` with your custom PotPlayer installation path, if necessary.
 
 ---
 
@@ -50,7 +54,7 @@ This plugin integrates OpenAI's ChatGPT API (or any model with the same API call
      `Model Name|API Interface URL`.  
      **Example**: `gpt-4o-mini|https://api.openai.com/v1/chat/completions/`  
    - **API Key**: Provide your API key.
-5. Set the source and target languages as needed.
+5. Set the source 和 target languages as needed.
 
 ---
 
