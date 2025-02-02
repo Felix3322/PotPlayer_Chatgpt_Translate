@@ -1,5 +1,9 @@
 # PotPlayer 的 ChatGPT 字幕翻译插件
 
+![GitHub License](https://img.shields.io/badge/license-MIT-blue.svg)
+![GitHub Stars](https://img.shields.io/github/stars/Felix3322/PotPlayer_Chatgpt_Translate?style=social)
+![GitHub Forks](https://img.shields.io/github/forks/Felix3322/PotPlayer_Chatgpt_Translate?style=social)
+
 该插件将 OpenAI 的 ChatGPT API（或任何支持相同 API 调用方法的模型）集成到 PotPlayer 中，以实现准确的字幕翻译。与传统翻译工具不同，该方法会考虑习语和文化细微差别，使其成为翻译字幕的理想解决方案。
 
 ---
