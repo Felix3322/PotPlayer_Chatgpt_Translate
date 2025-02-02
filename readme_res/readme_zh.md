@@ -8,6 +8,11 @@
 
 ---
 
+## 📺 Bilibili 教程视频 👇（点击观看）
+[![点击观看 Bilibili 视频](https://i1.hdslb.com/bfs/archive/88992bd0e80ff751771e78675a558b663a728028.jpg)](https://www.bilibili.com/video/BV1w9FzegEbM "点击观看 Bilibili 视频")
+
+---
+
 ## 安装
 
 ### 完全自动安装（推荐）
