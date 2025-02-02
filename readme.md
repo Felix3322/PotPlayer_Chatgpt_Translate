@@ -14,6 +14,11 @@ This plugin integrates OpenAI's ChatGPT API (or any model with the same API call
 
 ---
 
+## 📺 Bilibili Tutorial Video 👇(Click it)
+[![Watch on Bilibili](https://i1.hdslb.com/bfs/archive/88992bd0e80ff751771e78675a558b663a728028.jpg)](https://www.bilibili.com/video/BV1w9FzegEbM "Watch on Bilibili")
+
+---
+
 ## Installation
 
 ### Fully Automatic Installation (Recommended)
